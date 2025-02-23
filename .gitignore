@@ -1,0 +1,70 @@
+.*~
+chromedriver-win64/
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+
+# Ignore virtual environments
+venv/
+env/
+.venv/
+
+# Ignore Conda environment files
+*.conda
+*.log
+*.env
+conda-meta/
+*.lock
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore build artifacts
+build/
+dist/
+*.egg-info/
+*.manifest
+*.spec
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE/project settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore test and coverage reports
+.coverage
+htmlcov/
+*.cover
+.pytest_cache/
+
+# Ignore dependency files
+Pipfile
+Pipfile.lock
+poetry.lock
+
+# Ignore dataset and large files
+data/
+*.csv
+*.tsv
+*.parquet
+*.db
+*.sqlite
+*.h5
+*.npz
+
+# Ignore logs and temp files
+logs/
+*.log
+*.tmp
+
+# Ignore Conda environment lock files (optional)
+environment.yml.lock
