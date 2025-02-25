@@ -15,3 +15,10 @@ To-Do:
  - Improve the prompt, a lot
  - Add response request for judgement on priority of notification
  - Create browser for response history
+ - Improve previous analysis inclusion
+   - Find way to compress that won't lose useful information
+   - Find a way to include particularly important past maps in the request?
+   - Completely drop uneventful periods. Ie. 'Include 4 past analysis' = Include 4 past _significant_ analysis
+ - Add function to include links to ticker details and adds other response embelishments
+ - Ensure previous responses are chronological
+ - Add ability to ask questions of historical data
