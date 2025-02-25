@@ -22,3 +22,4 @@ To-Do:
  - Add function to include links to ticker details and adds other response embelishments
  - Ensure previous responses are chronological
  - Add ability to ask questions of historical data
+ - Ability to set my current thoughts, concerns, theories, so it can color the analysis 
