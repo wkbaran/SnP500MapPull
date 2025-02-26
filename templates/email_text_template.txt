@@ -1,0 +1,9 @@
+S&P 500 Heat Map Analysis
+Date: {{date}} ({{day_of_week}})
+Local Time: {{local_time}}
+Market Time (EST): {{est_time}}
+
+Analysis Results:
+{{analysis_text}}
+
+This is an automated message from your S&P 500 Heat Map Analyzer.

@@ -13,11 +13,13 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.application import MIMEApplication
+from jinja2 import Environment, FileSystemLoader
 
 class SP500HeatMapAnalyzer:
     def __init__(self, api_key, api_endpoint, image_path, storage_dir="./data", max_previous=4,
                  email_enabled=False, email_sender="", email_recipients=None,
-                 smtp_server="", smtp_port=587, smtp_username="", smtp_password="", smtp_use_tls=True):
+                 smtp_server="", smtp_port=587, smtp_username="", smtp_password="",
+                 templates_dir="./templates"):
         self.api_key = api_key
         self.api_endpoint = api_endpoint
         self.image_path = image_path
@@ -34,7 +36,6 @@ class SP500HeatMapAnalyzer:
         self.smtp_port = smtp_port
         self.smtp_username = smtp_username
         self.smtp_password = smtp_password
-        self.smtp_use_tls = smtp_use_tls
 
         # Create storage directory if it doesn't exist
         if not os.path.exists(storage_dir):
@@ -340,8 +341,7 @@ This is an automated message from your S&P 500 Heat Map Analyzer.
 
             # Connect to SMTP server and send email
             with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
-                if self.smtp_use_tls:
-                    server.starttls()
+                server.starttls()
 
                 # Login if credentials provided
                 if self.smtp_username and self.smtp_password:
@@ -358,38 +358,20 @@ This is an automated message from your S&P 500 Heat Map Analyzer.
 if __name__ == "__main__":
     load_dotenv()
 
-    # Configuration (replace with your actual values)
-    API_KEY = os.getenv("API_KEY")
-    API_ENDPOINT = os.getenv("API_ENDPOINT")
-    IMAGE_PATH = os.getenv("IMAGE_PATH")
-    MAX_PREVIOUS = int(os.getenv("MAX_PREVIOUS", "4"))
-
-    # Email configuration
-    EMAIL_ENABLED = os.getenv("EMAIL_ENABLED", "false").lower() == "true"
-    EMAIL_SENDER = os.getenv("EMAIL_SENDER", "")
-    EMAIL_RECIPIENTS = os.getenv("EMAIL_RECIPIENTS", "").split(",") if os.getenv("EMAIL_RECIPIENTS") else []
-
-    # SMTP configuration
-    SMTP_SERVER = os.getenv("SMTP_SERVER", "")
-    SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
-    SMTP_USERNAME = os.getenv("SMTP_USERNAME", "")
-    SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "")
-    SMTP_USE_TLS = os.getenv("SMTP_USE_TLS", "true").lower() == "true"
-
     # Run the analysis
     analyzer = SP500HeatMapAnalyzer(
-        API_KEY,
-        API_ENDPOINT,
-        IMAGE_PATH,
-        max_previous=MAX_PREVIOUS,
-        email_enabled=EMAIL_ENABLED,
-        email_sender=EMAIL_SENDER,
-        email_recipients=EMAIL_RECIPIENTS,
-        smtp_server=SMTP_SERVER,
-        smtp_port=SMTP_PORT,
-        smtp_username=SMTP_USERNAME,
-        smtp_password=SMTP_PASSWORD,
-        smtp_use_tls=SMTP_USE_TLS
+        os.getenv("API_KEY"),
+        os.getenv("API_ENDPOINT"),
+        os.getenv("IMAGE_PATH"),
+        max_previous=int(os.getenv("MAX_PREVIOUS", "4")),
+        email_enabled=os.getenv("EMAIL_ENABLED", "false").lower() == "true",
+        email_sender=os.getenv("EMAIL_SENDER", ""),
+        email_recipients=os.getenv("EMAIL_RECIPIENTS", "").split(",") if os.getenv("EMAIL_RECIPIENTS") else [],
+        smtp_server=os.getenv("SMTP_SERVER", ""),
+        smtp_port=int(os.getenv("SMTP_PORT", "587")),
+        smtp_username=os.getenv("SMTP_USERNAME", ""),
+        smtp_password=os.getenv("SMTP_PASSWORD", ""),
+        templates_dir=os.getenv("TEMPLATES_DIR", "./templates")
     )
 
     analysis_result = analyzer.analyze_heatmap()

@@ -1,0 +1,11 @@
+Current date: {{date}} ({{day_of_week}})
+Local time: {{local_time}}
+Market time (EST): {{est_time}}
+
+Analyze this S&P 500 Heat Map image.
+
+1. Identify the overall market trend (bullish/bearish)
+2. Note which sectors are performing the best and worst
+3. Identify any notable outlier stocks (significant gains or losses)
+
+Format your response using markdown for better readability. Use headings, bullet points, and bold text where appropriate.
